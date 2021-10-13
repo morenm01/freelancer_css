@@ -1,10 +1,30 @@
-:root {
+:root {/*custom properties*/
     --blanco: #ffffff;
     --primario: #FFC107;
     --secundario: #0097A7;
     --gris: #757575;
     --oscuro: #212121;
 }
+/*
+BEM -> BLOQUES__ELEMENTOS--MODIFICADORES
+card__boton--active {}
+
+UTILITY FIRST
+definen las utilidades tienen una clase con una utilidad
+.text-center{}
+.color-red-100{}
+.bg-blue-200{}
+.p-2{}
+.m-2{}
+
+MODULOS
+Primero contenido principal
+vas seleccionando las etiquetas html
+.card {}
+.card h2{}
+.card img{}
+.card a {}
+*/
 html {
     box-sizing: border-box;
     min-height: 100%;
@@ -58,14 +78,15 @@ h3 {
 .navegacion {
     scroll-snap-align: center;
     scroll-snap-stop: always;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
+    display: flex;/*para activar flexbox sobre los enlaces, se indica en el padre*/
+    flex-direction: column; /*por defecto es row*/
+    align-items: center;/*para alinear las columnas*/
+
 }
 @media (min-width:768px) {
     .navegacion {
         flex-direction: row;
-        justify-content: space-between;
+        justify-content: space-between;/*para alinear las filas*/
     }
 }
 .navegacion a{
