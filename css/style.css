@@ -37,16 +37,22 @@ ctrl `+ shif + p --> user snippet
 html {
     box-sizing: border-box;
     min-height: 100%;
-    scroll-snap-type: y mandatory;
+    scroll-snap-type: y mandatory;/*para manejar el scroll en el eje y, se podría poner horizontar para el eje x
+    en otro elemento donque queremos que pare se le pondría 
+    scroll-snap-align: center;
+    scroll-snap-stop: always;*/
 }
 *, *:before, *:after {
-    box-sizing: inherit;
+    box-sizing: inherit;/*pilla el box-sizing del html y se lo aplica a todos los elementos*/
 }
 p {
     line-height: 2;
 }
 body {
     font-family: 'Krub', sans-serif;
+    /*1º le indicamos la dirección del degradado, en este caso de abajo hacia arriba
+    2º le indicamos el color por el que empieza y desde donde empieza, en este caso desde el 0 en botton
+    3º el color en el que termina y el sitio en la web en este caso top 100% hasta arriba del todo*/
     background-image: linear-gradient(to top, #dfe9f3 0%, white 100%);
     min-height: 100%;
     
@@ -72,11 +78,14 @@ h3 {
     margin: 0 auto;
     max-width: 1200px;
 }
-.sombra {
+.sombra {/* sacamos la sombra con https://www.cssmatic.com/*/
     padding: 2rem;
     margin-bottom: 3rem;
     background-color: rgba(255, 255, 255, 1);
     border-radius: 10px;
+    /*en realidad no hace falta el webkit ni el moz 
+    lo podemos comprobar en la web caniuse para ver la compatibilidad de un elemento en 
+    los distintos navegadores*/
     -webkit-box-shadow: 0px 11px 15px -9px rgba(0,0,0,0.63);
     -moz-box-shadow: 0px 11px 15px -9px rgba(0,0,0,0.63);
     box-shadow: 0px 11px 15px -9px rgba(0,0,0,0.63);
@@ -121,8 +130,11 @@ h3 {
     height: 450px;
     background-image: url(../img/hero.jpg);
     margin-bottom: 2rem;
-    position: relative;
+    position: relative;/*para posicionar lo que vaya dentro al padre se le pone relative y 
+    al hijo absolute, pudiendo después dar coordenadas con top, left etc. o con %*/
+    
 }
+
 .contenido-hero {
     background-color: rgb(0 0 0 / 70%); /** Otra opción **/
     background-color: rgba(0, 0, 0, .7);
@@ -162,21 +174,35 @@ h3 {
     .servicios {
         display: grid;
         grid-template-columns: 33.3% 33.3% 33.3%;
+        /*también se puede indicar por fracciones, en este caso 1fr sería igual a 33,3%
+         grid-template-columns: 1fr 1fr 1fr;
+         
+         y eso es lo mismo que decirle repiteme 3 veces un frame
+         grid-template-columns: repeat(3, 1fr);*/
         column-gap: 1rem;
+        /*HABILITAMOS DISPLAY GRID EN EL PADRE
+        podemos definir cuantas filas y columnas y sus tamaños
+        grid-template-columns: 300px 300px;
+        grid-template-rows: 200px 800px;
+
+        y eso es lo mismo que poner esto primero filas y después columnas
+        grid: 200px 800px / 300px 300px;
+
+        */
     }
 }
 .servicio {
     text-align:center;
 }
 .servicio {
-    display: flex;
+    display: flex;/*habilitamos flex para alinear los circulos*/
     flex-direction: column;
     align-items: center;
 }
 
 
 .iconos {
-    display: flex;
+    display: flex; /*habilitamos flex para alinear las imagenes de los iconos*/
     height: 150px;
     width: 150px;
     justify-content: space-evenly;
@@ -191,13 +217,29 @@ h3 {
 
 
 .formulario {
+    /*Con esta función le estaríamos diciendo coge el mínimo de los dos
+    de esta forma nos ahorrariamos las media queries
+    width: min( 60rem, 100%)
+    */
+    /*para centrar el formulario y cualquier otra cosa que no pueda tener
+    un padre un display flex usariamos
+    margin: 0 auto;
+    */
     background-color: var(--gris);
     padding: 2rem;
     border-radius: 10px;
     scroll-snap-align: center;
     scroll-snap-stop: always;
 }
+
+/*usariamos border: none para quitar el borde al fieldset
+
+.formulario fieldset{
+    border:none;
+}
+*/
 .formulario legend {
+    
     text-align: center;
     font-size: 1.2rem;
     color: var(--primario);
@@ -217,7 +259,24 @@ h3 {
     justify-content: space-between;
     flex-wrap: wrap;
 }
+/*Usaríamos grid para alinear los campos del formulario
+lo incluiríamos dentro de un media querie para que no afecte a los móviles
+.contenedor-campos {
+    display: grid;
+    grid-template-colums: 50% 50%; o repeat(2,1fr)
+    grid-template-rows: auto, auto, 20rem;
+    column-gap: 1rem;
+}
+ahora para indicarle que el tercer campo, es decir, el correo
+debe ocupar desde la columna 1 hasta la 3, es decir, todo el ancho
+.campo:nth-child(3), .campo:nth-child(4){
+    grid-column: 1 / 3;
 
+    también le podríamos cambiar la fila donde se muestra poniendo
+    grid-column: 3 / 4;
+    lo dejaría debajo del textarea
+}
+}*/
 .campo {
     margin-bottom: 1rem;
     width: 100%;
@@ -237,7 +296,7 @@ h3 {
     color: var(--blanco);
     font-weight: 700;
     margin-bottom: .5rem;
-    display: block;
+    display: block; /*para que ocupe todo el espacio disponible*/
 }
 @media (min-width:480px) {
     .campo label {
